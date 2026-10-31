@@ -1,8 +1,11 @@
 # Managing AI Agents for Solo Software Builders
 
+- **[Read the live tutorial on GitHub Pages](https://az9713.github.io/managing-ai-agents-tutorial/)**
+- **[Open the interactive charter builder](https://az9713.github.io/managing-ai-agents-tutorial/artifacts/workbench.html)**
+
 A screenshot-free tutorial based on Austin Marchese's interview with Nate Herk. It explains five management steps and preserves six attributed on-screen prompts, with a solo software feature as the running example.
 
-Open [index.html](index.html) in a browser, or read [tutorial.md](tutorial.md). Open [the charter builder](artifacts/workbench.html) to draft and export an agent job description. No build or API key is needed.
+For offline use, download this repository and open `index.html` in a browser. You can also [read the Markdown version](tutorial.md). No build or API key is needed.
 
 Included: permission boundaries, validation examples for CSV export, correction handling, a proposed CI monitor, two reusable skills, and blank operating templates. No agent or scheduled automation is activated.
 
