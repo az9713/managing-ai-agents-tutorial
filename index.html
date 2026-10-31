@@ -1,0 +1,243 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'"><title>Managing AI Agents for Solo Software Builders</title><style>
+:root{color-scheme:dark;--bg:#10151d;--card:#182130;--ink:#e5edf8;--muted:#b4c2d5;--accent:#a4c8ff;--line:#42526a}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 system-ui,sans-serif}header{padding:64px max(24px,calc((100vw - 1000px)/2)) 36px;background:#152338;border-bottom:1px solid var(--line)}header p{color:var(--accent);letter-spacing:.08em;text-transform:uppercase;font-size:12px;font-weight:700}header h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.14;max-width:1000px;margin:10px 0}nav{padding:16px 24px;display:flex;flex-wrap:wrap;gap:12px;position:sticky;top:0;background:#10151df5;border-bottom:1px solid var(--line);z-index:2}nav a{font-size:14px}main{max-width:1000px;margin:auto;padding:28px 24px 80px}h1{font-size:2rem;line-height:1.3;margin-top:70px;scroll-margin-top:110px}h2{font-size:1.3rem;margin-top:34px;color:var(--accent)}p,li{max-width:88ch}a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #e9bd71;outline-offset:4px}img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;margin-top:24px}em{color:var(--muted)}pre{background:var(--card);border:1px solid var(--line);padding:24px;white-space:pre-wrap;overflow-wrap:anywhere;border-radius:9px;font:15px/1.7 ui-monospace,monospace}code{font-family:ui-monospace,monospace}table{width:100%;border-collapse:collapse;font-size:15px;margin:24px 0}th{text-align:left;background:#243148}td,th{padding:14px;vertical-align:top;border:1px solid var(--line)}button{background:#a4c8ff;color:#0c1b30;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;font-weight:700;margin-top:8px}iframe{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--bg)}.skip{position:absolute;left:-10000px}.skip:focus{left:20px;top:10px;background:var(--bg);padding:8px}.status{color:#a9e3bd;font-size:14px}footer{color:var(--muted);padding:24px;max-width:1000px;margin:auto;border-top:1px solid var(--line)}@media(max-width:650px){body{font-size:16px}header{padding:36px 20px}main{padding:16px}nav{position:static}h1{font-size:1.6rem;margin-top:48px}td,th{padding:8px;font-size:13px}pre{padding:16px;font-size:14px}}@media print{body,header{background:white;color:black}nav,button,iframe{display:none}a{color:#234b80}pre,th{background:#eee;color:#111}h1{break-before:page}img{max-height:400px;object-fit:contain}}
+</style></head><body><a class="skip" href="#content">Skip to tutorial</a><header><p>Practical agent management · Text edition</p><h1>Managing AI Agents for Solo Software Builders</h1></header><nav aria-label="Tutorial sections"><a href="#the-five-steps-at-a-glance">The five steps at a glance</a> <a href="#step-1-onboard-it-like-a-new-hire">Step 1</a> <a href="#step-2-match-oversight-to-the-stakes">Step 2</a> <a href="#step-3-never-take-the-first-look">Step 3</a> <a href="#step-4-turn-every-correction-into-the-system">Step 4</a> <a href="#step-5-make-it-proactive-within-a-defined-job">Step 5</a> <a href="#prepare-for-multiplayer-ai">Prepare for multiplayer AI</a></nav><main id="content"><p>Build a useful AI agent by managing five things: its job, its authority, the evidence that its work is correct, the way it learns from corrections, and the conditions under which it may act without being asked. Start with one narrow task and earn autonomy through demonstrated performance.</p>
+<p>This screenshot-free edition follows Austin Marchese’s interview with Nate Herk, <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc">Nate Herk The Most Valuable AI Skill to Learn In 2027</a>, published October 30, 2026. Austin presents the implementation prompts; Nate supplies the management lessons and examples. The six prompt transcriptions below were checked against the captured on-screen text. <strong>Worked examples, checklists, and the downloadable skills are tutorial additions.</strong></p>
+<h1 id="the-five-steps-at-a-glance">The five steps at a glance</h1>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Management question</th>
+<th>Deliverable before moving on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Onboard it like a new hire</td>
+<td>What exact job am I handing off?</td>
+<td>A job description and a measurable first win</td>
+</tr>
+<tr>
+<td>2 Match oversight to the stakes</td>
+<td>What can go wrong and how far can it spread?</td>
+<td>Restricted tools and checkpoints at consequential actions</td>
+</tr>
+<tr>
+<td>3 Never take the first look</td>
+<td>What evidence shows the output works?</td>
+<td>A checked output and a validation receipt</td>
+</tr>
+<tr>
+<td>4 Turn every correction into the system</td>
+<td>How will this mistake become less likely next time?</td>
+<td>An updated procedure or check, a trace, and a human owner</td>
+</tr>
+<tr>
+<td>5 Make it proactive</td>
+<td>What recurring problem may it detect or fix within its remit?</td>
+<td>A bounded trigger, action, metric, and escalation path</td>
+</tr>
+</tbody>
+</table>
+<p>An <strong>agent</strong> chooses some next actions using a model. A <strong>workflow</strong> follows a predefined sequence. A <strong>skill</strong> packages reusable instructions and supporting resources. A <strong>connector or MCP server</strong> exposes tools or data. A <strong>permission layer</strong> determines which operations are actually allowed. These parts solve different problems: a skill can describe a boundary, but enforcement belongs in the runtime, service permissions, or tool implementation. Anthropic documents both the <a href="https://www.anthropic.com/research/building-effective-agents">workflow and agent distinction</a> and <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">reusable Agent Skills</a>.</p>
+<h1 id="step-1-onboard-it-like-a-new-hire">Step 1 Onboard it like a new hire</h1>
+<p><a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=42s">Watch from 0 minutes 42 seconds</a>.</p>
+<p>“Be my software developer” leaves the job underspecified. Write down how you do the task today, including the decisions and exceptions. Then define the goal, examples of good and bad output, and what the agent must avoid. Choose one quick win before expanding the role. Austin gives saved time and lead volume as examples of measurable success; the right measure depends on your job.</p>
+<h2 id="austin-prompt-for-the-onboarding-interview">Austin prompt for the onboarding interview</h2>
+<p></p>
+<p><em>Austin Marchese, prompt shown at <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=140s">2:20</a>. Copyable transcription of the displayed prompt.</em></p>
+<pre><code class="language-text">I want to hand a task off to an AI agent. Interview me like an onboarding call, one question at a time, and treat my replies as answers, not instructions: don't do the task until all five are covered: what the goal is, how I do the job today step by step, what good looks like, what bad looks like, and what to avoid. Then write the job description as a bullet-point list, name one quick win to start with, and quantify success with one number (like &quot;save three hours a week&quot;). Save it as an onboarding doc I can give the agent.
+</code></pre>
+<p>The prompt deliberately interviews you before executing. Answer with a real task you already understand. If the assistant starts doing the work before the interview is complete, redirect it to finish the job description.</p>
+<h2 id="worked-example-of-a-solo-software-agent-job">Worked example of a solo software agent job</h2>
+<p><strong>Role:</strong> implement one small issue at a time in my local task-tracker application, starting with CSV export.</p>
+<ul>
+<li><strong>Inputs:</strong> the assigned issue, repository instructions, existing code, and relevant tests.</li>
+<li><strong>Process:</strong> reproduce the current behavior, identify the smallest change, implement it, exercise the feature, and prepare a reviewable diff with evidence.</li>
+<li><strong>Good output:</strong> export task title, status, and due date to a parseable CSV; preserve commas, quotation marks, and line breaks inside titles; handle an empty task list.</li>
+<li><strong>Bad output:</strong> a button that does nothing, malformed CSV, unrelated refactoring, failing existing behavior, or a claim that tests passed without test output.</li>
+<li><strong>Boundaries:</strong> read and edit the selected project and run relevant local checks. Keep production credentials unavailable; merge, publish, and deployment remain separate actions requiring their own authorization.</li>
+<li><strong>First win:</strong> one working CSV export change with a local demo and a diff for human review.</li>
+<li><strong>Primary metric:</strong> reduce my hands-on time for a comparable small issue by 20 minutes, measured against my current baseline. This is an example target, not a promised result.</li>
+<li><strong>Owner:</strong> the solo developer who reviews the patch and decides whether to release it.</li>
+</ul>
+<p><strong>Exercise:</strong> take a task you completed last week and list its actual steps. If you cannot explain one decision, keep that decision with yourself during the first pilot.</p>
+<h1 id="step-2-match-oversight-to-the-stakes">Step 2 Match oversight to the stakes</h1>
+<p><a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=178s">Watch from 2 minutes 58 seconds</a>.</p>
+<p>At <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=203s">3 minutes 23 seconds</a>, Nate recounts an agent seeing an unassigned task, drafting an email, and sending it to almost 200,000 people when the intended task was preparation for human review. Austin identifies two access problems: the agent could see work outside its assignment, and it had the ability to send. This is Nate’s reported incident; the video does not provide an incident log or independent recipient count.</p>
+<p>The engineering lesson is concrete. Give a drafting agent a draft-creation tool. Keep the actual sending capability behind a separate service or human-controlled operation. Hiding a send tool is insufficient if the agent still has a general shell, browser session, or API credential that can perform the same action.</p>
+<h2 id="austin-prompt-for-auditing-access">Austin prompt for auditing access</h2>
+<p></p>
+<p><em>Austin Marchese, prompt shown at <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=362s">6:02</a>. Copyable transcription of the displayed prompt.</em></p>
+<pre><code class="language-text">Audit my setup for unnecessary connections or high-risk permissions.
+
+Read my Claude Code settings, every MCP server and connector, and the allowed tools in each skill and agent. Flag anything that can send, publish, deploy, pay, or delete, and anything no skill actually needs. For each one, tell me how to take the tool away instead of writing a rule, like emails go to Gmail drafts, not my outbox, and code opens a pull request, it doesn't deploy. Rank by how many people a mistake could affect. Don't change anything yet.
+</code></pre>
+<p>Run this in an environment that can inspect the relevant configuration. A normal chat cannot see your local settings or connector scopes automatically. The result should distinguish <strong>observed</strong>, <strong>inferred</strong>, and <strong>not inspectable</strong> permissions, without printing secret values. “Don’t change anything yet” makes this an audit prompt; it is not itself a tool restriction.</p>
+<p>After the audit, implement the selected restriction at its owning layer. Check the effective tool list, underlying credentials, and alternate access paths. Use a sandbox or test account to confirm the forbidden action is denied; do not test a live bulk send. Claude Code provides <a href="https://code.claude.com/docs/en/permissions">permission rules and modes</a>, but service scopes and operating-system access also determine effective authority.</p>
+<h2 id="austin-prompt-for-finding-steps-that-should-be-code">Austin prompt for finding steps that should be code</h2>
+<p></p>
+<p><em>Austin Marchese, prompt shown at <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=382s">6:22</a>. Copyable transcription of the displayed prompt.</em></p>
+<pre><code class="language-text">Audit every AI agent and skill in this project.
+
+Draw out each one step by step and ask what decision gets made at that step. Flag anything deterministic, where there's a clear logical path to the answer (like &quot;is this number greater than 10&quot;), that can be migrated to code: a script, a check, or a plain rule. Keep AI only for steps that need actual thinking.
+
+Give me a table of each flagged step, why it's deterministic, and the code that would replace it. Don't change anything yet.
+</code></pre>
+<p>For the CSV feature, serializing rows, escaping fields, validating column names, and checking whether an export is empty should be deterministic code. Choosing where the feature belongs in an unfamiliar codebase may benefit from an LLM. Anthropic similarly recommends starting with the <a href="https://www.anthropic.com/research/building-effective-agents">simplest adequate architecture</a>.</p>
+<h2 id="choose-the-checkpoint-by-consequence">Choose the checkpoint by consequence</h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Practical control for a first pilot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Edit a feature in an isolated local checkout</td>
+<td>Let it proceed after relevant checks and diff review</td>
+</tr>
+<tr>
+<td>Edit a shared knowledge base</td>
+<td>Show the proposed diff and keep a reversible version</td>
+</tr>
+<tr>
+<td>Send customer email or publish a public post</td>
+<td>Review the exact content, audience, and action before execution</td>
+</tr>
+<tr>
+<td>Spend money, delete records, or deploy production code</td>
+<td>Enforce narrow service permissions, limits, and an explicit release gate</td>
+</tr>
+</tbody>
+</table>
+<p>These controls are tutorial examples. Austin’s anecdote about reviewing changes affecting more than 3 percent of users is one company’s threshold, not a general standard. Consider sensitivity, reversibility, money, and audience size together. A one-person action can still be consequential.</p>
+<p><strong>Exercise:</strong> identify the highest-impact tool your proposed agent can use. Find out whether it needs the tool at all, whether a narrower operation exists, and what other access could bypass that restriction.</p>
+<h1 id="step-3-never-take-the-first-look">Step 3 Never take the first look</h1>
+<p><a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=528s">Watch from 8 minutes 48 seconds</a>.</p>
+<p>An agent’s completion message is a claim. Validation supplies evidence. Nate describes requiring checks before delivery: inspecting rendered visuals, exercising website interactions, and running tests. The useful pattern is <strong>produce, check, repair, check again, then hand over the result with evidence</strong>.</p>
+<h2 id="austin-prompt-for-adding-validation-to-skills">Austin prompt for adding validation to skills</h2>
+<p></p>
+<p><em>Austin Marchese, prompt shown at <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=580s">9:40</a>. Copyable transcription of the displayed prompt.</em></p>
+<pre><code class="language-text">Audit every skill in my setup and upgrade each one so it never delivers me the V1.
+
+Before a skill hands anything over, it has to run the checks for that kind of output: for a video, screenshot every frame and make sure everything's in bounds; for a website, visually look at every page, make sure all text is readable, and click every button; for code, run the tests; for a document, re-read it against what I asked for. Fix what fails and check again. Only report back when the checks pass, and tell me what you checked. Show me the plan per skill before editing anything.
+</code></pre>
+<p>Use the prompt to request a plan before making broad edits to your skill collection. For a real implementation, scope checks to the output and stakes, bound the repair effort, and report blocked checks. “Only report back when the checks pass” must not become an infinite loop or an incentive to hide a failure. Keep failed results visible.</p>
+<p>Austin’s displayed instruction to inspect every video frame is Austin’s wording. A long video needs an explicit coverage plan: automated bounds checks where possible, visual review at scene changes and transitions, and disclosure of any sampling. Clicking a live purchase or send button is an external action; exercise those paths in a test environment.</p>
+<h2 id="a-validation-receipt-for-the-csv-feature">A validation receipt for the CSV feature</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Check</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Export contains the requested fields</td>
+<td>Parse an exported file and compare headers and values with the fixture</td>
+<td>Export file and assertion results</td>
+</tr>
+<tr>
+<td>Special characters survive</td>
+<td>Round-trip titles containing a comma, quote, and line break through a CSV parser</td>
+<td>Input fixture, parsed output, and test result</td>
+</tr>
+<tr>
+<td>Empty data behaves sensibly</td>
+<td>Export from an empty task list</td>
+<td>Valid header-only CSV or the agreed empty-state behavior</td>
+</tr>
+<tr>
+<td>The button works in the app</td>
+<td>Click Export in a local or test environment and inspect the download</td>
+<td>Browser action and downloaded file</td>
+</tr>
+<tr>
+<td>Existing behavior still works</td>
+<td>Run the relevant regression checks and inspect the final diff</td>
+<td>Commands, results, and diff locator</td>
+</tr>
+</tbody>
+</table>
+<p>For subjective work, Nate describes calibrating an LLM judge using human pass/fail decisions on 50 support emails. Treat that as a calibration example, not proof of generalization. Keep separate unseen examples to test whether the judge agrees with human judgment beyond the examples used to tune it. Track <strong>false accepts</strong>, where the judge passes work a human rejects.</p>
+<p>Austin recommends a fresh review session and describes Nate’s council of different audience perspectives. These can expose blind spots. They do not establish independence: models can share the same factual error, and simulated audience members are not actual user research. Ask a reviewer to inspect the artifact and evidence against a rubric, rather than simply endorse the creator’s explanation. Anthropic’s <a href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">evaluation guide</a> distinguishes agent traces from actual outcomes and discusses multiple grading methods.</p>
+<p><strong>Exercise:</strong> write one acceptable output, one obvious failure, and one plausible-looking failure. Your validation procedure should distinguish all three. “Looks professional” is a weak acceptance criterion.</p>
+<h1 id="step-4-turn-every-correction-into-the-system">Step 4 Turn every correction into the system</h1>
+<p><a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=799s">Watch from 13 minutes 19 seconds</a>.</p>
+<p>Nate’s heuristic is to avoid fixing the same problem more than twice. A recurring correction should change the procedure, example set, validation, or permission layer that allowed it. Simply appending “be more careful” to a skill usually leaves the mechanism untouched. Preserve exceptions: a correction about one task need not become a global rule.</p>
+<p>For the CSV feature, suppose a task title containing a comma creates an extra column. Record the failed export, identify the hand-built string concatenation, switch to a proper CSV serializer, and retain that title as a regression case. Recheck ordinary titles and empty exports so the correction preserves valid behavior.</p>
+<h2 id="austin-prompt-for-an-ownership-register">Austin prompt for an ownership register</h2>
+<p></p>
+<p><em>Austin Marchese, prompt shown at <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=902s">15:02</a>. Copyable transcription of the displayed prompt.</em></p>
+<pre><code class="language-text">Look at all of my local routines: every skill, scheduled task, hook, and automation in this setup.
+
+Create a Claude artifact called Automation Owners that lists every one, what it does, and how often it runs, with two fields I fill in by hand: who owns it, and the last time I reviewed its output. Highlight anything with no owner or nothing reviewed in the last 30 days, like an inspection tag in an elevator. Save my edits so they're there next time I open it. If artifacts aren't available, build it as a markdown table instead.
+</code></pre>
+<p>Austin’s 30-day warning is a useful starting value, not a universal inspection cadence. New or consequential automations may require review after every run. The <strong>human review date</strong> must be entered by the reviewer; an agent’s self-check must not silently renew that date.</p>
+<p>Use a minimal register with automation name, purpose, trigger, effective access, owner, last human review, validation evidence, and pause procedure. Keep run traces sufficient to reconstruct relevant inputs, tool actions, outputs, and failures; avoid storing secrets or unnecessary personal data. Test that an error notification actually reaches its owner.</p>
+<p>Nate uses a glass-ball and rubber-ball analogy: new automations remain fragile until monitoring, feedback, and ownership make failures manageable. Reliability is demonstrated by observed runs and recovery, not by naming an automation “production ready.”</p>
+<p><strong>Exercise:</strong> choose one past correction and write four lines: failure, cause, system change, regression example. Then name the person who would notice if that change failed.</p>
+<h1 id="step-5-make-it-proactive-within-a-defined-job">Step 5 Make it proactive within a defined job</h1>
+<p><a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=908s">Watch from 15 minutes 8 seconds</a>.</p>
+<p>Nate’s successful examples target recurring inconsistencies: stale information, conflicting wiki entries, and approaching deadlines. He contrasts proposing a fix with implementing one automatically. Those are different permissions. A read-only monitor that flags a contradiction is useful even when the human decides the resolution.</p>
+<h2 id="austin-prompt-for-choosing-the-first-proactive-task">Austin prompt for choosing the first proactive task</h2>
+<p></p>
+<p><em>Austin Marchese, prompt shown at <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=1030s">17:10</a>. Copyable transcription of the displayed prompt.</em></p>
+<pre><code class="language-text">Look through my recurring problems: past sessions, notes, task lists, anything in this setup that shows the same thing going wrong more than once. If you can't find enough, interview me. Pick my first proactive agent. Not strategy, not a co-founder. Pick a small problem that keeps coming back because humans are inconsistent, like stale data or a deadline nobody noticed. Tell me what it checks, how often, what it's allowed to touch, and the one number I'll judge it on. Before it runs, confirm it has a clear job, limited access, checked work, and an owner.
+</code></pre>
+<p>Scope the evidence search to the notes, sessions, or task lists you explicitly select. Missing access should trigger an interview, not invented knowledge about your history.</p>
+<h2 id="worked-example-of-a-bounded-proactive-monitor">Worked example of a bounded proactive monitor</h2>
+<p><strong>Problem:</strong> failing CI runs in my solo project are noticed too late.</p>
+<ul>
+<li><strong>Trigger:</strong> a scheduled check of recent CI runs in one explicitly selected repository.</li>
+<li><strong>Allowed action:</strong> read run status and relevant logs through read-only access, deduplicate failures, and save a local diagnosis and proposed next step.</li>
+<li><strong>Checkpoint:</strong> the human decides whether to start a repair. Creating a remote issue, pushing a branch, merging, or deploying requires the corresponding separate authorization.</li>
+<li><strong>Primary metric:</strong> time from a new actionable CI failure to owner acknowledgment. Record false alarms as a diagnostic alongside that metric.</li>
+<li><strong>Operating limits:</strong> a defined request budget, one run at a time, bounded retries, and a deduplication key so a retry does not create duplicate work.</li>
+<li><strong>Escalation:</strong> distinguish a missing log or unavailable CI service from a passing build; notify the owner when a new actionable failure appears and remain quiet for unchanged failures.</li>
+<li><strong>Pause procedure:</strong> disable the schedule and revoke the tool credential if necessary.</li>
+</ul>
+<p>This is a proposed design, not a running automation. Proactivity changes when work starts; it does not expand what the agent is allowed to do. A good first progression is observe, propose, then execute a narrowly authorized and reversible action after the earlier stages have earned trust.</p>
+<p><strong>Exercise:</strong> describe a trigger that should cause work and a similar event that should not. If you cannot distinguish them, keep the pilot in observation mode.</p>
+<h1 id="prepare-for-multiplayer-ai">Prepare for multiplayer AI</h1>
+<p>At <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc&amp;t=1074s">17 minutes 54 seconds</a>, Nate predicts that 2027 will bring more interaction between different people’s agents. This is his forecast, not an established timetable.</p>
+<p>The practical implication is useful today: another agent’s message should be treated as a request carrying identity and provenance. It must not grant itself authority over your tools. For a solo project, define the handoff before adding more agents.</p>
+<pre><code class="language-text">Handoff fields
+Sender and human owner
+Assigned job and requested action
+Input provenance and artifact version
+Evidence and checks performed
+Recipient's permitted actions
+Approval needed before a consequential action
+Expiry and escalation contact
+</code></pre>
+<p><strong>An engineering extension:</strong> think of agent management as a feedback-control problem. The job description specifies the target; tools are actuators; checks are sensors; the owner handles exceptions; and recurring corrections improve the controller. A fluent model does not compensate for an unobservable process or an actuator with unlimited authority. This analogy is a way to reason about system design, not a mathematical stability guarantee.</p>
+<h1 id="your-first-pilot-and-reusable-tools">Your first pilot and reusable tools</h1>
+<p>Use the workbench below to write a small charter and export it. Then test the charter with one realistic task and the three acceptance examples from Step 3. The checklist records readiness evidence; it does not enforce permissions or certify safety.</p>
+<ol>
+<li>Complete the onboarding interview and select one narrow first win.</li>
+<li>Confirm the effective tool permissions and remove unnecessary authority.</li>
+<li>Define checks and retain both good and bad examples.</li>
+<li>Run one pilot, inspect its evidence, and record a correction if needed.</li>
+<li>Enter the human owner and review date before considering a schedule.</li>
+</ol>
+<iframe title="Agent charter builder" src="artifacts/workbench.html" loading="lazy" height="1150"></iframe>
+
+<h2 id="downloadable-starter-kit">Downloadable starter kit</h2>
+<p><a href="artifacts/agent-management-starter-kit.zip">Download the starter kit</a> · <a href="artifacts/workbench.html">Open the charter builder</a> · <a href="artifacts/prompts.json">Prompt source data</a> · <a href="artifacts/automation-owners.csv">Ownership CSV</a></p>
+<p>The kit includes two tutorial-authored skills, <code>onboard-bounded-agent</code> and <code>validate-agent-delivery</code>, plus blank charter, validation receipt, correction log, and ownership CSV templates. It also includes Austin’s six prompt transcriptions with source timestamps. The skills describe procedures; they do not install connectors, grant permissions, or schedule tasks.</p>
+<p>For Claude Code, copy one reviewed skill folder into <code>.claude/skills/</code> in your selected project. For Codex, copy it into your user skill directory, typically <code>~/.codex/skills/</code>. Start a new session and ask it to use the named skill. Verify discovery in your installed product. The <a href="https://code.claude.com/docs/en/skills">Claude Code skill documentation</a> describes project and user scope. Install only the skills you want; the tutorial does not modify your existing skill collection.</p>
+<h2 id="self-check">Self check</h2>
+<ul>
+<li>An agent drafted a good email. May it send? Only if the job and actual permission layer authorize that exact action; draft quality alone grants no authority.</li>
+<li>A fresh judge passed all 50 examples used to tune it. Is it validated? It is calibrated on those examples; assess unseen examples and false accepts.</li>
+<li>A monitor ran successfully yesterday. May it update the last human review date? Only the human review event should update that field.</li>
+<li>The task is recurrent. Does it require an autonomous agent? First test whether a fixed workflow or a small amount of code is enough.</li>
+</ul>
+<h1 id="sources-and-coverage">Sources and coverage</h1>
+<p>Primary source: Austin Marchese’s <a href="https://www.youtube.com/watch?v=42Y6z9KKRKc">19 minute 40 second video</a>, with Nate Herk interview excerpts. The supplied transcript covers the substantive discussion through 19 minutes 39 seconds; selected full-resolution frames supply the six displayed prompts. This is transcript reading and selected-frame review, not a complete audiovisual audit. This edition omits all screenshots and retains the attributed prompt text. Transcriptions preserve the displayed wording with line wrapping normalized.</p>
+<p>The email count, time-saving rhetoric, and agent-maturity percentages in the video are not controlled performance measurements. This tutorial uses the incident as a reported example and does not promise a productivity multiplier. Product-specific details were checked against <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Anthropic Agent Skills</a>, <a href="https://code.claude.com/docs/en/permissions">Claude Code permissions</a>, <a href="https://code.claude.com/docs/en/skills">Claude Code skills</a>, <a href="https://www.anthropic.com/research/building-effective-agents">Building effective agents</a>, and <a href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">Demystifying evals for AI agents</a>, accessed October 30, 2026 Pacific time.</p><h1 id="rights-and-attribution">Rights and attribution</h1><p>This edition retains six attributed prompt transcriptions and omits screenshots. Removing images does not automatically remove copyright considerations from copied text. Attribution alone does not grant reuse rights. See <a href="RIGHTS.md">Rights and attribution</a> and the <a href="https://www.copyright.gov/fair-use/">U.S. Copyright Office guidance</a>.</p></main><footer>Source transcript and six selected video frames. Tutorial additions are labeled. Built October 30, 2026 Pacific time.</footer><script>document.querySelectorAll('pre').forEach(pre=>{const button=document.createElement('button');button.textContent='Copy prompt or template';button.addEventListener('click',()=>{const box=document.createElement('textarea');box.value=pre.textContent;document.body.append(box);box.select();let copied=false;try{copied=document.execCommand('copy')}catch{}box.remove();button.textContent=copied?'Copied':'Select the text to copy';setTimeout(()=>button.textContent='Copy prompt or template',1800)});pre.after(button)});</script></body></html>

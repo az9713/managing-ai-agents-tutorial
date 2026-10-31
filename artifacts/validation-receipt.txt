@@ -1,0 +1,12 @@
+VALIDATION RECEIPT
+Artifact and version:
+Original acceptance criteria:
+Check | Method | Actual result | Evidence locator
+
+Passed:
+Failed:
+Blocked or not performed:
+Repair and recheck evidence:
+Human decision needed:
+Automated validation time:
+Last human review event, if any:

@@ -1,0 +1,48 @@
+{
+  "video": {
+    "title": "Nate Herk: The Most Valuable AI Skill to Learn In 2027",
+    "channel": "Austin Marchese",
+    "url": "https://www.youtube.com/watch?v=42Y6z9KKRKc",
+    "duration_seconds": 1180,
+    "license_status": "No separate reuse license identified in acquired metadata"
+  },
+  "prompts": [
+    {
+      "id": "onboarding",
+      "title": "AI Agent Job Description",
+      "seconds": 140,
+      "url": "https://www.youtube.com/watch?v=42Y6z9KKRKc&t=140s"
+    },
+    {
+      "id": "permissions",
+      "title": "Audit Connections and Permissions",
+      "seconds": 362,
+      "url": "https://www.youtube.com/watch?v=42Y6z9KKRKc&t=362s"
+    },
+    {
+      "id": "code",
+      "title": "Flag What Can Be Code",
+      "seconds": 382,
+      "url": "https://www.youtube.com/watch?v=42Y6z9KKRKc&t=382s"
+    },
+    {
+      "id": "validation",
+      "title": "Upgrade Skills to Check Work",
+      "seconds": 580,
+      "url": "https://www.youtube.com/watch?v=42Y6z9KKRKc&t=580s"
+    },
+    {
+      "id": "owners",
+      "title": "Automation Owners Inspection Tag",
+      "seconds": 902,
+      "url": "https://www.youtube.com/watch?v=42Y6z9KKRKc&t=902s"
+    },
+    {
+      "id": "proactive",
+      "title": "Pick Your First Proactive Agent",
+      "seconds": 1030,
+      "url": "https://www.youtube.com/watch?v=42Y6z9KKRKc&t=1030s"
+    }
+  ],
+  "coverage": "Supplied transcript and six selected frame checks; no complete audiovisual audit. Source media excluded from this edition."
+}

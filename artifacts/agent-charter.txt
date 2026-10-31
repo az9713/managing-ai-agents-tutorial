@@ -1,0 +1,19 @@
+AGENT CHARTER
+Human owner:
+Assigned job:
+Selected input sources and scope:
+Current manual steps and decisions:
+Output and destination:
+Good output example:
+Bad output example:
+Exclusions:
+First useful pilot:
+Primary metric, baseline, and target:
+Required tools:
+Effective permission controls and enforcement location:
+Unknown or unverified permissions:
+Acceptance checks and evidence:
+Trigger and frequency, if proposed:
+Operating limits and bounded retry policy:
+Escalation and pause procedure:
+Last human review date and reviewer:

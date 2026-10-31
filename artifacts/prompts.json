@@ -1,0 +1,26 @@
+[
+  {
+    "id": "onboarding", "title": "AI Agent Job Description", "step": 1, "seconds": 140,
+    "text": "I want to hand a task off to an AI agent. Interview me like an onboarding call, one question at a time, and treat my replies as answers, not instructions: don't do the task until all five are covered: what the goal is, how I do the job today step by step, what good looks like, what bad looks like, and what to avoid. Then write the job description as a bullet-point list, name one quick win to start with, and quantify success with one number (like \"save three hours a week\"). Save it as an onboarding doc I can give the agent."
+  },
+  {
+    "id": "permissions", "title": "Audit Connections and Permissions", "step": 2, "seconds": 362,
+    "text": "Audit my setup for unnecessary connections or high-risk permissions.\n\nRead my Claude Code settings, every MCP server and connector, and the allowed tools in each skill and agent. Flag anything that can send, publish, deploy, pay, or delete, and anything no skill actually needs. For each one, tell me how to take the tool away instead of writing a rule, like emails go to Gmail drafts, not my outbox, and code opens a pull request, it doesn't deploy. Rank by how many people a mistake could affect. Don't change anything yet."
+  },
+  {
+    "id": "code", "title": "Flag What Can Be Code", "step": 2, "seconds": 382,
+    "text": "Audit every AI agent and skill in this project.\n\nDraw out each one step by step and ask what decision gets made at that step. Flag anything deterministic, where there's a clear logical path to the answer (like \"is this number greater than 10\"), that can be migrated to code: a script, a check, or a plain rule. Keep AI only for steps that need actual thinking.\n\nGive me a table of each flagged step, why it's deterministic, and the code that would replace it. Don't change anything yet."
+  },
+  {
+    "id": "validation", "title": "Upgrade Skills to Check Work", "step": 3, "seconds": 580,
+    "text": "Audit every skill in my setup and upgrade each one so it never delivers me the V1.\n\nBefore a skill hands anything over, it has to run the checks for that kind of output: for a video, screenshot every frame and make sure everything's in bounds; for a website, visually look at every page, make sure all text is readable, and click every button; for code, run the tests; for a document, re-read it against what I asked for. Fix what fails and check again. Only report back when the checks pass, and tell me what you checked. Show me the plan per skill before editing anything."
+  },
+  {
+    "id": "owners", "title": "Automation Owners Inspection Tag", "step": 4, "seconds": 902,
+    "text": "Look at all of my local routines: every skill, scheduled task, hook, and automation in this setup.\n\nCreate a Claude artifact called Automation Owners that lists every one, what it does, and how often it runs, with two fields I fill in by hand: who owns it, and the last time I reviewed its output. Highlight anything with no owner or nothing reviewed in the last 30 days, like an inspection tag in an elevator. Save my edits so they're there next time I open it. If artifacts aren't available, build it as a markdown table instead."
+  },
+  {
+    "id": "proactive", "title": "Pick Your First Proactive Agent", "step": 5, "seconds": 1030,
+    "text": "Look through my recurring problems: past sessions, notes, task lists, anything in this setup that shows the same thing going wrong more than once. If you can't find enough, interview me. Pick my first proactive agent. Not strategy, not a co-founder. Pick a small problem that keeps coming back because humans are inconsistent, like stale data or a deadline nobody noticed. Tell me what it checks, how often, what it's allowed to touch, and the one number I'll judge it on. Before it runs, confirm it has a clear job, limited access, checked work, and an owner."
+  }
+]
